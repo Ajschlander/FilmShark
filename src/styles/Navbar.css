@@ -1,0 +1,12 @@
+.Navbar {
+    background-color: #212529;
+}
+
+.Navbar-img {
+    width: 9rem;
+    height: 9rem;
+}
+
+.Navbar-button {
+    color: #28a745;
+}

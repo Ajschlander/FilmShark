@@ -41,9 +41,7 @@ const SignUp = ({ history }) => {
       </form>
 
       <h1>Already have an account?</h1>
-      <span>
-        <Link to="/login">Click to login</Link>
-      </span>
+      <Link to="/login">Click to login</Link>
       
     </div>
   );

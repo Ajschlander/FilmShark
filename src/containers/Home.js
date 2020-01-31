@@ -1,21 +1,26 @@
 import React from "react";
 import * as firebase from "firebase";
 import app from "../firebase";
+import Navbar from "../components/Navbar";
+
+const signOut = () => {
+    app.auth().signOut();
+};
 
 const Home = () => {
 
     const user = firebase.auth().currentUser;
 
     return (
-        <>
-            <h1>Home Page</h1>
+        <div>
+            <Navbar />
+            
+            {/* <h1>Home Page</h1>
             <p>Hello {user.email}</p>
-            <button onClick={() => {
-                app.auth().signOut()
-            }}>
+            <button onClick={signOut}>
                 Sign out
-            </button>
-        </>
+            </button> */}
+        </div>
     )
 }
 
