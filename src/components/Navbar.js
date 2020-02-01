@@ -12,10 +12,15 @@ const useStyles = makeStyles(theme => ({
             marginLeft: theme.spacing(2),
         },
     },
-    button: {
+    active: {
         color: "#00d38e",
         cursor: "pointer",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        textDecoration: "underline"
+    },
+    button: {
+        color: "#00d38e",
+        cursor: "pointer"
     },
     container: {
         paddingRight: 15,
@@ -41,7 +46,7 @@ const signOut = () => {
 };
 
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     let classes = useStyles();
 
@@ -59,7 +64,7 @@ const Navbar = () => {
             </Grid>
             <Grid item>
               <Typography className={classes.root}>
-                <Link className={classes.button}>Relevance</Link>
+                <Link className={classes.active}>Relevance</Link>
                 <Link className={classes.button}>Rating</Link>
                 <Link className={classes.button}>Year</Link>
               </Typography>
@@ -67,6 +72,7 @@ const Navbar = () => {
             <Grid item>
               {/* Login/Signout */}
               <Typography>
+                <Link>{props.user.email}</Link>
                 <Link className={classes.button} onClick={signOut}>
                   Logout<ExitToAppIcon />
                 </Link>
