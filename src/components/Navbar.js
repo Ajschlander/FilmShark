@@ -64,7 +64,7 @@ const Navbar = (props) => {
             </Grid>
             <Grid item>
               <Typography className={classes.root}>
-                <Link className={classes.active}>Relevance</Link>
+                <Link className={classes.button}>Relevance</Link>
                 <Link className={classes.button}>Rating</Link>
                 <Link className={classes.button}>Year</Link>
               </Typography>
