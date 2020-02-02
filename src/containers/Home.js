@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import TextField from '@material-ui/core/TextField';
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import useDebounce from "../hooks/useDebounce";
 
 let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
@@ -36,6 +37,16 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const searchMovies = async (query) => {
+    let res = await axios.get(
+        "https://api.themoviedb.org/3/search/movie?api_key=" +
+        API_KEY +
+        "&language=en-US&query=" + query
+    );
+    let data = res.data;
+    return data.results;
+}
+
 const Home = () => {
 
     // Get the user that is logged in
@@ -49,34 +60,36 @@ const Home = () => {
             [sort, setSort]     = useState(""),
             [loaded, setLoaded] = useState(false),
             [error, setError]   = useState(false),
-            [input, setInput]   = useState(''),
-            [query, setQuery]   = useState("dark");
+            [query, setQuery]   = useState("Dark");
 
-    // Call this hook every time "query" gets updated
+    let debouncedSearchTerm = useDebounce(query, 500);
+
     useEffect(() => {
-        const getData = async () => {
-            let res = await axios.get(
-                "https://api.themoviedb.org/3/search/movie?api_key=" +
-                API_KEY +
-                "&language=en-US&query=" + query
-            );
-            let data = res.data;
-            console.log(data.results);
-            setMovies(data.results);
-            setLoaded(true);
-            setError(false);
-            setSort("relevance");
-        };
-        getData();
-    }, [query]);
+      // Make sure we have a value (user has entered something in input)
+      if (debouncedSearchTerm) {
+        // Fire off our API call
+        searchMovies(debouncedSearchTerm).then(results => {
+          setMovies(results);
+        });
+      } else {
+        setMovies([]);
+      }
+    },
+    [debouncedSearchTerm]
+  );
 
     return (
         <div>
             <Navbar user={user}/>
             <div className={classes.container}>
                 <form className={classes.root} noValidate autoComplete="off">
-                    <TextField className={classes.input} id="standard-basic" label="Title" value={query} />
+                    <TextField className={classes.input} id="standard-basic" label="Title" value={query} onChange={e => {
+                        setQuery(e.target.value);
+                    }}/>
                 </form>
+                <div>
+                    {/* Render movie cards */}
+                </div>
             </div>
         </div>
     )
