@@ -1,5 +1,10 @@
 .Navbar {
-    background-color: #212529;
+    background-color: rgb(27, 31, 39);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
 }
 
 .Navbar-img {
