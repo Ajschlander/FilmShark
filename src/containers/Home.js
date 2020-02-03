@@ -1,19 +1,32 @@
 import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Link, Typography } from "@material-ui/core";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import * as firebase from "firebase";
+import app from "../firebase";
 import TextField from '@material-ui/core/TextField';
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import useDebounce from "../hooks/useDebounce";
+import logo from "../images/logo transparent.png";
+import "../styles/Navbar.css";
 
 let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: "50%",
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
         },
+    },
+    active: {
+        color: "#00d38e",
+        cursor: "pointer",
+        fontWeight: "bold",
+        textDecoration: "underline"
+    },
+    button: {
+        color: "#00d38e",
+        cursor: "pointer"
     },
     container: {
         paddingRight: 15,
@@ -37,16 +50,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const searchMovies = async (query) => {
-    let res = await axios.get(
-        "https://api.themoviedb.org/3/search/movie?api_key=" +
-        API_KEY +
-        "&language=en-US&query=" + query
-    );
-    let data = res.data;
-    return data.results;
-}
-
 const Home = () => {
 
     // Get the user that is logged in
@@ -57,39 +60,153 @@ const Home = () => {
 
     // Setting up state values
     const   [movies, setMovies] = useState([]),
-            [sort, setSort]     = useState(""),
-            [loaded, setLoaded] = useState(false),
+            [sort, setSort]     = useState("relevance"),
             [error, setError]   = useState(false),
+            [loaded, setLoaded] = useState(true),
             [query, setQuery]   = useState("Dark");
 
-    let debouncedSearchTerm = useDebounce(query, 500);
+    let debouncedQuery = useDebounce(query, 500);
 
     useEffect(() => {
-      // Make sure we have a value (user has entered something in input)
-      if (debouncedSearchTerm) {
-        // Fire off our API call
-        searchMovies(debouncedSearchTerm).then(results => {
-          setMovies(results);
-        });
-      } else {
-        setMovies([]);
-      }
-    },
-    [debouncedSearchTerm]
+    // Make sure we have a value (user has entered something in input)
+        if (debouncedQuery) {
+            // Fire off API call
+            searchMovies(debouncedQuery).then(results => {
+                setMovies(results);
+            });
+            } else {
+                setMovies([]);
+            }
+        },
+        [debouncedQuery]
   );
 
-    return (
-        <div>
-            <Navbar user={user}/>
-            <div className={classes.container}>
-                <form className={classes.root} noValidate autoComplete="off">
-                    <TextField className={classes.input} id="standard-basic" label="Title" value={query} onChange={e => {
-                        setQuery(e.target.value);
-                    }}/>
-                </form>
-                <div>
-                    {/* Render movie cards */}
+    // functions
+    const signOut = () => {
+        app.auth().signOut();
+    };
+
+    const reset = () => {
+        window.location.reload();
+    }
+
+    const sortByRating = () => {
+        setSort("rating");
+    }
+
+    const sortByRelevance = () => {
+        setSort("relevance");
+    }
+
+    const sortByYear = () => {
+        setSort("year");
+    }
+
+    const selectedSort = (selected) => {
+        if(sort === selected){
+            return {
+                color: "#00d38e",
+                cursor: "pointer",
+                fontWeight: "bold",
+                textDecoration: "underline"
+            }
+        }
+    }
+
+    useEffect(() => {
+        if(sort === "rating"){
+            setMovies(movies.map((a, b) => {
+                if (a.vote_average > b.vote_average) return -1;
+                if (a.vote_average < b.vote_average) return 1;
+                return 0;
+            }))
+        }
+        else if(sort === "year"){
+            setMovies(movies.map((a, b) => {
+                if (a.release_date.substring(0, 4) > b.release_date.substring(0, 4)) return -1;
+                if (a.release_date.substring(0, 4) < b.release_date.substring(0, 4)) return 1;
+                return 0;
+            }))
+        }
+        else {
+            searchMovies();
+        }
+    }, [sort])
+
+    const searchMovies = async () => {
+
+        try{
+            let res = await axios.get(
+                "https://api.themoviedb.org/3/search/movie?api_key=" +
+                API_KEY +
+                "&language=en-US&query=" + query
+            );
+            let data = res.data;
+            setLoaded(true);
+            setError(false);
+            setSort("relevance");
+            setMovies(data.results);
+        }
+        // Catches API limit errors, reloads page until resets
+        catch(err){
+            if(err.status === "429"){
+                console.log('Error 429');
+                setError(true);
+                setLoaded(false);
+            }
+            searchMovies(query);
+        }
+    }
+
+    const renderNavbar = () => {
+        return (
+            <div className="Navbar">
+                <div className={classes.container}>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-between"
+                    alignItems="center"
+                >
+                    <Grid item>
+                    <img className="Navbar-img" src={logo} alt="FilmShark" />
+                    </Grid>
+                    <Grid item>
+                        <Typography className={classes.root}>
+                            <Link className={classes.button} onClick={sortByRelevance}>Relevance</Link>
+                            <Link className={classes.button} onClick={sortByRating}>Rating</Link>
+                            <Link className={classes.button} onClick={sortByYear}>Year</Link>
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                    <Typography>
+                        <Link className={classes.button} onClick={signOut}>
+                        Logout<ExitToAppIcon />
+                        </Link>
+                    </Typography>
+                    </Grid>
+                </Grid>
                 </div>
+            </div>
+        )
+    }
+
+    const renderContent = () => {
+        if(loaded && movies.length >= 1){
+            
+        }
+        else {
+
+        }
+    }
+
+    return (
+        <div className="Home">
+            <div className="Home-header">
+                {renderNavbar()}
+            </div>
+            <div>
+                {/* render content */}
             </div>
         </div>
     )
