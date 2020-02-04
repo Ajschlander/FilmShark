@@ -20,8 +20,12 @@
 }
 
 .Form-title-underline {
-	width: 30%;
+	width: 60%;
 	border: 2px solid #00d38e;
 	border-radius: 2px;
 	margin-bottom: 2rem;
+}
+
+.Form-input {
+	margin-bottom: 1.5rem;
 }

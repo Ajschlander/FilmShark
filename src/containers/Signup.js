@@ -1,10 +1,24 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, TextField, Button } from "@material-ui/core";
 import { AuthContext } from "../utils/Auth";
 import app from "../firebase";
+import "../styles/Form.css";
+
+const useStyles = makeStyles(theme => ({
+	input: {
+		color: "#00d38e"
+	},
+	button: {
+		color: "#00d38e",
+		border: "1px solid #00d38e"
+	}
+}));
 
 const SignUp = ({ history }) => {
+	let classes = useStyles();
 	const handleSignUp = useCallback(
 		async event => {
 			event.preventDefault();
@@ -16,7 +30,7 @@ const SignUp = ({ history }) => {
 						email.value,
 						password.value
 					);
-				history.push("/");
+				history.push("/home");
 			} catch (err) {
 				console.log(err.message);
 			}
@@ -31,26 +45,45 @@ const SignUp = ({ history }) => {
 	}
 
 	return (
-		<div>
-			<h1>Sign up</h1>
-			<form onSubmit={handleSignUp}>
-				<label>
-					Email
-					<input name="email" type="email" placeholder="Email" />
-				</label>
-				<label>
-					Password
-					<input
-						name="password"
-						type="password"
-						placeholder="Password"
-					/>
-				</label>
-				<button type="submit">Sign Up</button>
-			</form>
-
-			<h1>Already have an account?</h1>
-			<Link to="/login">Click to login</Link>
+		<div className="Form-background">
+			<Grid
+				container
+				spacing={0}
+				direction="column"
+				alignItems="center"
+				justify="center"
+				style={{ minHeight: "100vh" }}
+			>
+				<div className="Form-container">
+					<h1 className="Form-title">Sign Up</h1>
+					<hr align="left" className="Form-title-underline" />
+					<form onSubmit={handleSignUp}>
+						<div className="Form-input">
+							<TextField
+								className={classes.textField}
+								variant="outlined"
+								label="Email"
+								name="email"
+								type="email"
+								inputProps={{ className: classes.input }}
+							/>
+						</div>
+						<div className="Form-input">
+							<TextField
+								variant="outlined"
+								label="Password"
+								name="password"
+								type="password"
+								inputProps={{ className: classes.input }}
+							/>
+						</div>
+						<Button className={classes.button} type="submit">
+							Sign Up
+						</Button>
+					</form>
+					<Link to="/login">Already have an account?</Link>
+				</div>
+			</Grid>
 		</div>
 	);
 };

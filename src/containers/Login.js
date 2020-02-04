@@ -1,13 +1,21 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import app from "../firebase";
 import { AuthContext } from "../utils/Auth";
 import "../styles/Form.css";
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => ({
+	input: {
+		color: "#00d38e"
+	},
+	button: {
+		color: "#00d38e",
+		border: "1px solid #00d38e"
+	}
+}));
 
 const Login = ({ history }) => {
 	let classes = useStyles();
@@ -47,18 +55,28 @@ const Login = ({ history }) => {
 					<h1 className="Form-title">Log in</h1>
 					<hr align="left" className="Form-title-underline" />
 					<form onSubmit={handleLogin}>
-						<TextField
-							variant="outlined"
-							label="Email"
-							name="email"
-						/>
-						<TextField
-							variant="outlined"
-							label="Password"
-							name="password"
-							type="password"
-						/>
-						<button type="submit">Log in</button>
+						<div className="Form-input">
+							<TextField
+								className={classes.textField}
+								variant="outlined"
+								label="Email"
+								name="email"
+								type="email"
+								inputProps={{ className: classes.input }}
+							/>
+						</div>
+						<div className="Form-input">
+							<TextField
+								variant="outlined"
+								label="Password"
+								name="password"
+								type="password"
+								inputProps={{ className: classes.input }}
+							/>
+						</div>
+						<Button className={classes.button} type="submit">
+							Log in
+						</Button>
 					</form>
 					<Link to="/signup">Click here to signup</Link>
 				</div>
