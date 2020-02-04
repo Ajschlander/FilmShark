@@ -1,0 +1,29 @@
+.Landing-background {
+    background-image: url("../images/film-reel.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.Landing-welcome {
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+    box-shadow: 10px 10px 18px 0px rgba(0, 0, 0, 0.75);
+}
+
+.Landing-welcome-title {
+    color: #00d38e;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+                 0px 8px 13px rgba(0, 0, 0, 0.1),
+                 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
+.Landing-get-started {
+    color: #00d38e;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+}

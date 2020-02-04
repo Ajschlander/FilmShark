@@ -19,6 +19,7 @@ const MovieCard = (props) => {
                 let res = await axios.get("https://api.themoviedb.org/3/movie/" + props.id + "?api_key=" + API_KEY);
                 let data = res.data;
                 setMovie(data);
+                setLoaded(true);
             } catch (err) {
                 console.log(err);
             }
@@ -42,7 +43,12 @@ const MovieCard = (props) => {
     }
 
     const renderMovieInfo = () => {
+        if(loaded){
+            
+        }
+        else{
 
+        }
     }
 
     const renderLine = () => {
