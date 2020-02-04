@@ -1,17 +1,17 @@
 .Navbar {
-    background-color: rgb(27, 31, 39);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    overflow: hidden;
-    z-index: 10;
+	background-color: rgb(27, 31, 39);
+	position: fixed;
+	top: 0;
+	width: 100%;
+	overflow: hidden;
+	z-index: 10;
 }
 
 .Navbar-img {
-    width: 9rem;
-    height: 9rem;
+	width: 9rem;
+	height: 9rem;
 }
 
 .Navbar-button {
-    color: #28a745;
+	color: #28a745;
 }

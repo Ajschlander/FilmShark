@@ -5,46 +5,54 @@ import { AuthContext } from "../utils/Auth";
 import app from "../firebase";
 
 const SignUp = ({ history }) => {
-  const handleSignUp = useCallback(async event => {
-    event.preventDefault();
-    const { email, password } = event.target.elements;
-    try {
-      await app
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value);
-      history.push("/");
-    } catch (err) {
-      console.log(err.message);
-    }
+	const handleSignUp = useCallback(
+		async event => {
+			event.preventDefault();
+			const { email, password } = event.target.elements;
+			try {
+				await app
+					.auth()
+					.createUserWithEmailAndPassword(
+						email.value,
+						password.value
+					);
+				history.push("/");
+			} catch (err) {
+				console.log(err.message);
+			}
+		},
+		[history]
+	);
 
-  }, [history]);
+	const { currentUser } = useContext(AuthContext);
 
-  const { currentUser } = useContext(AuthContext);
+	if (currentUser) {
+		return <Redirect to="/home" />;
+	}
 
-    if (currentUser) {
-      return <Redirect to="/home" /> ;
-    }
+	return (
+		<div>
+			<h1>Sign up</h1>
+			<form onSubmit={handleSignUp}>
+				<label>
+					Email
+					<input name="email" type="email" placeholder="Email" />
+				</label>
+				<label>
+					Password
+					<input
+						name="password"
+						type="password"
+						placeholder="Password"
+					/>
+				</label>
+				<button type="submit">Sign Up</button>
+			</form>
 
-  return (
-    <div>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSignUp}>
-        <label>
-          Email
-          <input name="email" type="email" placeholder="Email" />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="Password" />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-
-      <h1>Already have an account?</h1>
-      <Link to="/login">Click to login</Link>
-      
-    </div>
-  );
+			<h1>Already have an account?</h1>
+			<Link to="/login">Click to login</Link>
+		</div>
+	);
 };
 
 export default withRouter(SignUp);
