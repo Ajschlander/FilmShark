@@ -12,8 +12,6 @@ import "../styles/Navbar.css";
 import "../styles/Main.css"
 import MovieCard from "../components/MovieCard";
 
-let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
-
 const useStyles = makeStyles(theme => ({
     root: {
         '& > * + *': {
@@ -53,6 +51,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = () => {
+
+    let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
     // Get the user that is logged in
     const user = firebase.auth().currentUser;
@@ -199,6 +199,7 @@ const Home = () => {
     }
 
     const renderContent = () => {
+        console.log(movies);
         if(loaded && movies.length >= 1){
             return (
                 <div className="Home-content">
@@ -206,8 +207,8 @@ const Home = () => {
                         <MovieCard 
                         title={movie.title} 
                         rating={movie.vote_average} 
-                        poster-img={movie.poster_path} 
-                        backdrop-img={movie.backdrop_path} 
+                        poster={movie.poster_path} 
+                        backdrop={movie.backdrop_path} 
                         description={movie.overview}
                         release-date={movie.release_date}
                         id={movie.id}
