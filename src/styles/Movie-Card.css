@@ -1,0 +1,113 @@
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.MovieCard-card {
+    width: 100%;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    transition: 2ms;
+    -webkit-animation: fadein 3s;
+    cursor: pointer;
+}
+
+.MovieCard-line-container {
+    width: 10%;
+    margin-top: 20px;
+}
+
+.MovieCard-line {
+    opacity: 0.8;
+    width: 25%;
+    border-radius: 90px;
+    height: 50%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    -webkit-animation: fadein 3s;
+}
+
+.MovieCard-poster-container {
+    -webkit-animation: fadein 1.5s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.MovieCard-poster {
+    width: 100%;
+    border-radius: 20px;
+    filter: grayscale(30%) contrast(85%) brightness(120%) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+    transition: 0.9s;
+}
+
+.MovieCard-poster:hover{
+    transform: scale(1.03);
+    filter: none;
+}
+
+.MovieCard-no-image {
+    width: 100%;
+    padding: 35%;
+}
+
+.MovieCard-info-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.MovieCard-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.MovieCard-buttons-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.MovieCard-title-container {
+    width: 90%;
+}
+
+.MovieCard-title {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.MovieCard-title span {
+    opacity: 0.3;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.MovieCard-rating {
+    text-align: center;
+    opacity: 0.5;
+    color: rgb(255, 208, 0);
+    font-size: 10pt;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 0.5s;
+    cursor: text;
+}
+
+.MovieCard-star {
+    margin-right: 1rem;
+}

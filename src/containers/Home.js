@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: 15,
 		marginRight: "auto",
 		marginLeft: "auto",
+		display: "flex",
 
 		// Full width for (xs, extra-small: 0px or larger) and (sm, small: 600px or larger)
 		[theme.breakpoints.up("md")]: {
@@ -224,7 +225,6 @@ const Home = () => {
 							</Typography>
 						</Grid>
 					</Grid>
-					<TextField />
 				</div>
 			</div>
 		);
@@ -234,20 +234,22 @@ const Home = () => {
 		console.log(movies);
 		if (loaded && movies.length >= 1) {
 			return (
-				<div className="Home-content">
+				<Grid container spacing={5} className="Home-content">
 					{movies.map(movie => (
-						<MovieCard
-							title={movie.title}
-							rating={movie.vote_average}
-							poster={movie.poster_path}
-							backdrop={movie.backdrop_path}
-							description={movie.overview}
-							release-date={movie.release_date}
-							id={movie.id}
-							key={movie.id}
-						/>
+						<Grid item xs={6} md={4} lg={3}>
+							<MovieCard
+								title={movie.title}
+								rating={movie.vote_average}
+								poster={movie.poster_path}
+								backdrop={movie.backdrop_path}
+								description={movie.overview}
+								release-date={movie.release_date}
+								id={movie.id}
+								key={movie.id}
+							/>
+						</Grid>
 					))}
-				</div>
+				</Grid>
 			);
 		} else {
 			return <h1>No movies found</h1>;
@@ -256,8 +258,12 @@ const Home = () => {
 
 	return (
 		<div className="Home-app">
-			<div>{renderNavbar()}</div>
-			<div className={classes.container}>{renderContent()}</div>
+			<div>
+				{renderNavbar()}
+			</div>
+			<div className={classes.container}>
+				{renderContent()}
+			</div>
 		</div>
 	);
 };
