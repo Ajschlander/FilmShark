@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IoIosPlayCircle } from "react-icons/io";
+import { IoIosPlayCircle, IoMdEye, IoIosAddCircle } from "react-icons/io";
 import { Grid, Button } from "@material-ui/core";
 import Modal from "react-modal";
 import axios from "axios";
