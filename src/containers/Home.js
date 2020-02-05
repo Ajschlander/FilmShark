@@ -98,7 +98,7 @@ const Home = () => {
 
 	let debouncedQuery = useDebounce(query, 1000);
 
-	const searchMovies = async (query) => {
+	const searchMovies = async query => {
 		try {
 			let res = await axios.get(
 				"https://api.themoviedb.org/3/search/movie?api_key=" +
@@ -189,10 +189,10 @@ const Home = () => {
 				return 0;
 			});
 			setMovies([...movies]);
-		} else if(sort === "relevance") {
+		} else if (sort === "relevance") {
 			searchMovies(debouncedQuery).then(results => {
 				setMovies(results);
-			})
+			});
 		}
 	}, [sort]);
 
