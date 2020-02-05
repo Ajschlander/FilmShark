@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as firebase from "firebase";
 import app from "../firebase";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Grid, Link, Typography } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TextField from "@material-ui/core/TextField";
@@ -48,11 +48,33 @@ const useStyles = makeStyles(theme => ({
 			// extra-large: 1920px or larger
 			width: 1366
 		}
-	},
-	input: {
-		marginLeft: "25%"
 	}
 }));
+
+const CssTextField = withStyles({
+	root: {
+		"& label.Mui-focused": {
+			color: "#00d38e"
+		},
+		"& .MuiFormLabel-root": {
+			color: "#00d38e"
+		},
+		"& .MuiInput-underline:after": {
+			borderBottomColor: "#00d38e"
+		},
+		"& .MuiOutlinedInput-root": {
+			"& fieldset": {
+				borderColor: "#00d38e"
+			},
+			"&:hover fieldset": {
+				borderColor: "#00d38e"
+			},
+			"&.Mui-focused fieldset": {
+				borderColor: "#00d38e"
+			}
+		}
+	}
+})(TextField);
 
 const Home = () => {
 	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
@@ -70,21 +92,43 @@ const Home = () => {
 		[loaded, setLoaded] = useState(true),
 		[query, setQuery] = useState("Dark");
 
-	// let debouncedQuery = useDebounce(query, 500);
+	let debouncedQuery = useDebounce(query, 1000);
 
-	//     useEffect(() => {
-	//     // Make sure we have a value (user has entered something in input)
-	//         if (debouncedQuery) {
-	//             // Fire off API call
-	//             searchMovies(debouncedQuery).then(results => {
-	//                 setMovies(results);
-	//             });
-	//             } else {
-	//                 setMovies([]);
-	//             }
-	//         },
-	//         [debouncedQuery]
-	//   );
+	const searchMovies = async (query) => {
+		try {
+			let res = await axios.get(
+				"https://api.themoviedb.org/3/search/movie?api_key=" +
+					API_KEY +
+					"&language=en-US&query=" +
+					query
+			);
+			let data = res.data;
+			setLoaded(true);
+			setError(false);
+			setSort("relevance");
+			return data.results;
+		} catch (err) {
+			// Catches API limit errors, reloads page until resets
+			if (err.status === "429") {
+				console.log("Error 429");
+				setError(true);
+				setLoaded(false);
+			}
+			searchMovies(query);
+		}
+	};
+
+	useEffect(() => {
+		// Make sure we have a value (user has entered something in input)
+		if (debouncedQuery) {
+			// Fire off API call
+			searchMovies(debouncedQuery).then(results => {
+				setMovies(results);
+			});
+		} else {
+			setMovies([]);
+		}
+	}, [debouncedQuery]);
 
 	// functions
 	const signOut = () => {
@@ -146,30 +190,6 @@ const Home = () => {
 		}
 	}, [sort]);
 
-	const searchMovies = async () => {
-		try {
-			let res = await axios.get(
-				"https://api.themoviedb.org/3/search/movie?api_key=" +
-					API_KEY +
-					"&language=en-US&query=" +
-					query
-			);
-			let data = res.data;
-			setLoaded(true);
-			setError(false);
-			setSort("relevance");
-			setMovies(data.results);
-		} catch (err) {
-			// Catches API limit errors, reloads page until resets
-			if (err.status === "429") {
-				console.log("Error 429");
-				setError(true);
-				setLoaded(false);
-			}
-			searchMovies(query);
-		}
-	};
-
 	const renderNavbar = () => {
 		return (
 			<div className="Navbar">
@@ -226,6 +246,19 @@ const Home = () => {
 						</Grid>
 					</Grid>
 				</div>
+				<div className={classes.container}>
+					<div className="Home-input">
+						<CssTextField
+							label="Search Movies..."
+							variant="outlined"
+							id="custom-css-outlined-input"
+							value={query}
+							onChange={e => {
+								setQuery(e.target.value);
+							}}
+						/>
+					</div>
+				</div>
 			</div>
 		);
 	};
@@ -258,12 +291,8 @@ const Home = () => {
 
 	return (
 		<div className="Home-app">
-			<div>
-				{renderNavbar()}
-			</div>
-			<div className={classes.container}>
-				{renderContent()}
-			</div>
+			<div>{renderNavbar()}</div>
+			<div className={classes.container}>{renderContent()}</div>
 		</div>
 	);
 };

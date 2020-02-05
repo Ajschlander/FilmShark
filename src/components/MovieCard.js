@@ -4,6 +4,7 @@ import { MdStar, MdPlayArrow } from "react-icons/md";
 import axios from "axios";
 import NoImg from "../images/no-img.png";
 import "../styles/Movie-Card.css";
+import MovieModal from "./MovieModal";
 
 const MovieCard = props => {
 	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
@@ -85,7 +86,7 @@ const MovieCard = props => {
 					</div>
 					<div className="MovieCard-info-container">
 						<div className="MovieCard-title-container">
-							<p>
+							<p className="MovieCard-title">
 								{movie.title}
 								<span>{movie.release_date.substring(0, 4)}</span>
 							</p>
@@ -125,6 +126,7 @@ const MovieCard = props => {
 	return (
 		<div className="MovieCard-card" onClick={showModal}>
 			<div>
+				{/* <MovieModal className="MovieCard-modal" isOpen={showModal} movie={movie}/> */}
 				{renderPoster()}
 				{renderMovieInfo()}
 			</div>
