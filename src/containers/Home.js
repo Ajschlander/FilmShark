@@ -62,6 +62,10 @@ const CssTextField = withStyles({
 		"& .MuiInput-underline:after": {
 			borderBottomColor: "#00d38e"
 		},
+		"& .MuiInputBase-input": {
+			color: "#00d38e",
+			fontWeight: "bold"
+		},
 		"& .MuiOutlinedInput-root": {
 			"& fieldset": {
 				borderColor: "#00d38e"
@@ -185,8 +189,10 @@ const Home = () => {
 				return 0;
 			});
 			setMovies([...movies]);
-		} else {
-			searchMovies();
+		} else if(sort === "relevance") {
+			searchMovies(debouncedQuery).then(results => {
+				setMovies(results);
+			})
 		}
 	}, [sort]);
 
@@ -249,6 +255,7 @@ const Home = () => {
 				<div className={classes.container}>
 					<div className="Home-input">
 						<CssTextField
+							className={classes.input}
 							label="Search Movies..."
 							variant="outlined"
 							id="custom-css-outlined-input"
