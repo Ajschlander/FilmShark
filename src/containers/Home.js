@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	button: {
 		color: "#00d38e",
-		cursor: "pointer"
+		cursor: "pointer",
+		textAlign: "center"
 	},
 	container: {
 		paddingRight: 15,
@@ -85,6 +86,7 @@ const Home = () => {
 
 	// Get the user that is logged in
 	const user = firebase.auth().currentUser;
+	let displayName = user.email.split("@")[0];
 
 	// set the useStyles to classes
 	let classes = useStyles();
@@ -240,6 +242,11 @@ const Home = () => {
 							</Typography>
 						</Grid>
 						<Grid item>
+							<div className="Home-hello-display-name">
+								<h2>
+									Hello {displayName}!
+								</h2>
+							</div>
 							<Typography>
 								<Link
 									className={classes.button}
@@ -253,18 +260,34 @@ const Home = () => {
 					</Grid>
 				</div>
 				<div className={classes.container}>
-					<div className="Home-input">
-						<CssTextField
-							className={classes.input}
-							label="Search Movies..."
-							variant="outlined"
-							id="custom-css-outlined-input"
-							value={query}
-							onChange={e => {
-								setQuery(e.target.value);
-							}}
-						/>
-					</div>
+					<Grid
+						container
+						direction="row"
+						justify="space-between"
+						alignItems="center"
+					>
+						<Grid item>
+							<div className="Home-input">
+								<CssTextField
+									className={classes.input}
+									label="Search Movies..."
+									variant="outlined"
+									id="custom-css-outlined-input"
+									value={query}
+									onChange={e => {
+										setQuery(e.target.value);
+									}}
+								/>
+							</div>
+						</Grid>
+						<Grid item>
+							<div className="Home-results-for-display">
+								<h2>
+									Results for: <span>{debouncedQuery}</span>
+								</h2>
+							</div>
+						</Grid>
+					</Grid>
 				</div>
 			</div>
 		);

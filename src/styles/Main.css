@@ -10,3 +10,17 @@
 .Home-input {
 	padding-bottom: 2rem;
 }
+
+.Home-results-for-display h2{
+	color: #00d38e;
+	margin-top: .5rem;
+}
+
+.Home-results-for-display h2 span{
+	text-decoration: underline;
+}
+
+.Home-hello-display-name h2{
+	color: #00d38e;
+	margin: 0;
+}
