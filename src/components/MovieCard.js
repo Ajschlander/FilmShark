@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Palette } from "react-palette";
-import { MdStar, MdPlayArrow } from "react-icons/md";
+import { MdStar } from "react-icons/md";
 import axios from "axios";
 import NoImg from "../images/no-img.png";
 import "../styles/Movie-Card.css";
@@ -11,7 +11,6 @@ const MovieCard = props => {
 
 	const [modal, setModal] = useState(false),
 		[loaded, setLoaded] = useState(false),
-		[error, setError] = useState(false),
 		[movie, setMovie] = useState([]);
 
 	// props
@@ -126,7 +125,7 @@ const MovieCard = props => {
 	return (
 		<div className="MovieCard-card" onClick={showModal}>
 			<div>
-				<MovieModal className="MovieCard-modal" isOpen={modal} movie={movie}/>
+				<MovieModal className="MovieCard-modal" isOpen={modal} movie={movie} key={movie.id}/>
 				{renderPoster()}
 				{renderMovieInfo()}
 			</div>

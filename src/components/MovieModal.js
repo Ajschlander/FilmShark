@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { IoIosPlayCircle, IoMdEye, IoIosAddCircle } from "react-icons/io";
 import { Grid, Button } from "@material-ui/core";
 import Modal from "react-modal";
@@ -10,7 +10,7 @@ Modal.setAppElement("#root");
 const MovieModal = props => {
 	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
-	const [closeModal, setCloseModal] = useState(true);
+	// isOpen is true
 
 	const closeMovieModal = () => {
 		return props.isOpen;
@@ -57,15 +57,19 @@ const MovieModal = props => {
 		}
 	};
 
-	const handleTrailerClick = async () => {
+	const handleTrailerClick = async (e) => {
 		let res = await axios.get(
 			"https://api.themoviedb.org/3/movie/" +
 				props.movie.id +
 				"/videos?api_key=" +
 				API_KEY
 		);
-        let data = res.data;
-		window.open("https://www.youtube.com/watch?v=" + data.results[0].key, "_blank");
+		let data = res.data;
+		window.open(
+			"https://www.youtube.com/watch?v=" + data.results[0].key,
+			"_blank"
+		);
+		e.stopPropagation();
 	};
 
 	return (
@@ -73,6 +77,7 @@ const MovieModal = props => {
 			<Modal
 				className="MovieModal-modal"
 				isOpen={props.isOpen}
+				onRequestClose={closeMovieModal}
 				shouldCloseOnOverlayClick={false}
 			>
 				<button onClick={closeMovieModal} className="MovieModal-button">
@@ -86,6 +91,9 @@ const MovieModal = props => {
 						props.movie.backdrop_path
 					}
 					alt="Backdrop"
+					onClick={e => {
+						e.stopPropagation()
+					}}
 				/>
 
 				<Grid container className="MovieModal-modal-container">
@@ -93,10 +101,23 @@ const MovieModal = props => {
 						<div className="MovieModal-modal-info">
 							<h1>{props.movie.title}</h1>
 							<div>
-								<p className="MovieModal-modal-overview">{props.movie.overview}</p>
-								<Button onClick={handleTrailerClick}>
-									<IoIosPlayCircle className="MovieModal-icon" />
+								<p className="MovieModal-modal-overview">
+									{props.movie.overview}
+								</p>
+								<Button
+									style={{ marginRight: "1rem" }}
+									onClick={handleTrailerClick}
+								>
+									<IoIosPlayCircle />
 									TRAILER
+								</Button>
+								<Button style={{ marginRight: "1rem" }}>
+									<IoMdEye />
+									Watch later
+								</Button>
+								<Button style={{ marginRight: "1rem" }}>
+									<IoIosAddCircle />
+									Add to favorites
 								</Button>
 							</div>
 						</div>

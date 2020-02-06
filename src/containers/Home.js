@@ -94,7 +94,6 @@ const Home = () => {
 	// Setting up state values
 	const [movies, setMovies] = useState([]),
 		[sort, setSort] = useState("relevance"),
-		[error, setError] = useState(false),
 		[loaded, setLoaded] = useState(true),
 		[query, setQuery] = useState("Dark");
 
@@ -110,14 +109,12 @@ const Home = () => {
 			);
 			let data = res.data;
 			setLoaded(true);
-			setError(false);
 			setSort("relevance");
 			return data.results;
 		} catch (err) {
 			// Catches API limit errors, reloads page until resets
 			if (err.status === "429") {
 				console.log("Error 429");
-				setError(true);
 				setLoaded(false);
 			}
 			searchMovies(query);
