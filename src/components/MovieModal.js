@@ -58,6 +58,7 @@ const MovieModal = props => {
 	};
 
 	const handleTrailerClick = async (e) => {
+		e.stopPropagation();
 		let res = await axios.get(
 			"https://api.themoviedb.org/3/movie/" +
 				props.movie.id +
@@ -69,7 +70,6 @@ const MovieModal = props => {
 			"https://www.youtube.com/watch?v=" + data.results[0].key,
 			"_blank"
 		);
-		e.stopPropagation();
 	};
 
 	return (
@@ -92,7 +92,7 @@ const MovieModal = props => {
 					}
 					alt="Backdrop"
 					onClick={e => {
-						e.stopPropagation()
+						e.stopPropagation();
 					}}
 				/>
 
@@ -111,11 +111,21 @@ const MovieModal = props => {
 									<IoIosPlayCircle />
 									TRAILER
 								</Button>
-								<Button style={{ marginRight: "1rem" }}>
+								<Button
+									style={{ marginRight: "1rem" }}
+									onClick={e => {
+										e.stopPropagation();
+									}}
+								>
 									<IoMdEye />
 									Watch later
 								</Button>
-								<Button style={{ marginRight: "1rem" }}>
+								<Button
+									style={{ marginRight: "1rem" }}
+									onClick={e => {
+										e.stopPropagation();
+									}}
+								>
 									<IoIosAddCircle />
 									Add to favorites
 								</Button>
