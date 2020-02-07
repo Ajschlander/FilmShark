@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import app from "../firebase";
@@ -16,6 +16,35 @@ const useStyles = makeStyles(theme => ({
 		border: "1px solid #00d38e"
 	}
 }));
+
+const CssTextField = withStyles({
+	root: {
+		"& label.Mui-focused": {
+			color: "#00d38e"
+		},
+		"& .MuiFormLabel-root": {
+			color: "#00d38e"
+		},
+		"& .MuiInput-underline:after": {
+			borderBottomColor: "#00d38e"
+		},
+		"& .MuiInputBase-input": {
+			color: "#00d38e",
+			fontWeight: "bold"
+		},
+		"& .MuiOutlinedInput-root": {
+			"& fieldset": {
+				borderColor: "#00d38e"
+			},
+			"&:hover fieldset": {
+				borderColor: "#00d38e"
+			},
+			"&.Mui-focused fieldset": {
+				borderColor: "#00d38e"
+			}
+		}
+	}
+})(TextField);
 
 const Login = ({ history }) => {
 	let classes = useStyles();
@@ -56,22 +85,23 @@ const Login = ({ history }) => {
 					<hr align="left" className="Form-title-underline" />
 					<form onSubmit={handleLogin}>
 						<div className="Form-input">
-							<TextField
-								className={classes.textField}
-								variant="outlined"
-								label="Email"
-								name="email"
-								type="email"
-								inputProps={{ className: classes.input }}
+							<CssTextField
+									className={classes.input}
+									label="Email"
+									name="email"
+									type="text"
+									variant="outlined"
+									id="custom-css-outlined-input"
 							/>
 						</div>
 						<div className="Form-input">
-							<TextField
-								variant="outlined"
+							<CssTextField
+								className={classes.input}
 								label="Password"
 								name="password"
 								type="password"
-								inputProps={{ className: classes.input }}
+								variant="outlined"
+								id="custom-css-outlined-input"
 							/>
 						</div>
 						<Button className={classes.button} type="submit">
