@@ -2,14 +2,14 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 
 const app = firebase.initializeApp({
-	apiKey: "AIzaSyCj8fo0CdYYSYtzL2Xmhx1DEMgvevogt5g",
-	authDomain: "filmshark-c0324.firebaseapp.com",
-	databaseURL: "https://filmshark-c0324.firebaseio.com",
-	projectId: "filmshark-c0324",
-	storageBucket: "filmshark-c0324.appspot.com",
-	messagingSenderId: "3960362904",
-	appId: "1:3960362904:web:b5b18ba71541985feabded",
-	measurementId: "G-ZCTLKW26JK"
+	apiKey: "AIzaSyCewsngV0t9B9HdWauaRI4rSK6TZ0Wh_QI",
+  	authDomain: "filmshark-78a6c.firebaseapp.com",
+  	databaseURL: "https://filmshark-78a6c.firebaseio.com",
+  	projectId: "filmshark-78a6c",
+  	storageBucket: "filmshark-78a6c.appspot.com",
+  	messagingSenderId: "235370868994",
+  	appId: "1:235370868994:web:07d8fa688e1a2ed665921b",
+  	measurementId: "G-VF8999BL44"
 });
 
 export default app;
