@@ -2,14 +2,13 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 
 const app = firebase.initializeApp({
-	apiKey: "AIzaSyCewsngV0t9B9HdWauaRI4rSK6TZ0Wh_QI",
-  	authDomain: "filmshark-78a6c.firebaseapp.com",
-  	databaseURL: "https://filmshark-78a6c.firebaseio.com",
-  	projectId: "filmshark-78a6c",
-  	storageBucket: "filmshark-78a6c.appspot.com",
-  	messagingSenderId: "235370868994",
-  	appId: "1:235370868994:web:07d8fa688e1a2ed665921b",
-  	measurementId: "G-VF8999BL44"
+	apiKey: process.env.REACT_APP_FIREBASE_KEY,
+	authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  	messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  	appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 });
-
 export default app;
