@@ -82,11 +82,9 @@ const CssTextField = withStyles({
 })(TextField);
 
 const Home = () => {
-	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
 	// Get the user that is logged in
 	const user = firebase.auth().currentUser;
-	let displayName = user.email.split("@")[0];
 
 	// set the useStyles to classes
 	let classes = useStyles();
@@ -103,7 +101,7 @@ const Home = () => {
 		try {
 			let res = await axios.get(
 				"https://api.themoviedb.org/3/search/movie?api_key=" +
-					API_KEY +
+					process.env.REACT_APP_MOVIE_API_KEY +
 					"&language=en-US&query=" +
 					query
 			);
@@ -241,7 +239,7 @@ const Home = () => {
 						<Grid item>
 							<div className="Home-hello-display-name">
 								<h2>
-									Hello {displayName}!
+									Hello {user.displayName}!
 								</h2>
 							</div>
 							<Typography>

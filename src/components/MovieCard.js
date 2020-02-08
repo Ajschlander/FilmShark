@@ -7,7 +7,6 @@ import "../styles/Movie-Card.css";
 import MovieModal from "./MovieModal";
 
 const MovieCard = props => {
-	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
 	const [modal, setModal] = useState(false),
 		[loaded, setLoaded] = useState(false),
@@ -23,7 +22,7 @@ const MovieCard = props => {
 					"https://api.themoviedb.org/3/movie/" +
 						props.id +
 						"?api_key=" +
-						API_KEY
+						process.env.REACT_APP_MOVIE_API_KEY
 				);
 				let data = res.data;
 				setMovie(data);

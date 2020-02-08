@@ -3,7 +3,9 @@ import app from "../firebase";
 
 const User = () => {
     return (
-        
+        <div>
+            
+        </div>
     )
 };
 

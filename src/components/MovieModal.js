@@ -8,7 +8,6 @@ import "../styles/Movie-Modal.css";
 Modal.setAppElement("#root");
 
 const MovieModal = props => {
-	let API_KEY = "6939281b4b2fc9bd592e14dec01248d5";
 
 	// isOpen is true
 
@@ -63,7 +62,7 @@ const MovieModal = props => {
 			"https://api.themoviedb.org/3/movie/" +
 				props.movie.id +
 				"/videos?api_key=" +
-				API_KEY
+				process.env.REACT_APP_MOVIE_API_KEY
 		);
 		let data = res.data;
 		window.open(

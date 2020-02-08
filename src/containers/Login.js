@@ -90,6 +90,7 @@ const Login = ({ history }) => {
 									label="Email"
 									name="email"
 									type="text"
+									required="true"
 									variant="outlined"
 									id="custom-css-outlined-input"
 							/>
@@ -100,6 +101,7 @@ const Login = ({ history }) => {
 								label="Password"
 								name="password"
 								type="password"
+								require="true"
 								variant="outlined"
 								id="custom-css-outlined-input"
 							/>

@@ -47,18 +47,29 @@ const CssTextField = withStyles({
 })(TextField);
 
 const SignUp = ({ history }) => {
+	const db = app.firestore();
 	let classes = useStyles();
 	const handleSignUp = useCallback(
 		async event => {
 			event.preventDefault();
 			const { email, password } = event.target.elements;
 			try {
-				await app
+				app
 					.auth()
 					.createUserWithEmailAndPassword(
 						email.value,
 						password.value
-					);
+					).then(cred => {
+						const user = {
+							uid: cred.user.uid,
+							email: email.value,
+							top5movies: [],
+							watchList: []
+						};
+						db.collection("users").doc(cred.user.uid).set(user);
+					}).catch(err => {
+						console.log(err);
+					});
 				history.push("/home");
 			} catch (err) {
 				console.log(err.message);
@@ -89,14 +100,26 @@ const SignUp = ({ history }) => {
 					<form onSubmit={handleSignUp}>
 						<div className="Form-input">
 							<CssTextField
-									className={classes.input}
-									label="Email"
-									name="Email"
-									type="text"
-									variant="outlined"
-									id="custom-css-outlined-input"
+								className={classes.input}
+								label="Email"
+								name="email"
+								type="text"
+								variant="outlined"
+								required="true"
+								id="custom-css-outlined-input"
 							/>
 						</div>
+						{/* <div className="Form-input">
+							<CssTextField
+								className={classes.input}
+								label="Display Name"
+								name="name"
+								type="text"
+								variant="outlined"
+								required="true"
+								id="custom-css-outlined-input"
+							/>
+						</div> */}
 						<div className="Form-input">
 							<CssTextField
 								className={classes.input}
@@ -104,6 +127,7 @@ const SignUp = ({ history }) => {
 								name="password"
 								type="password"
 								variant="outlined"
+								required="true"
 								id="custom-css-outlined-input"
 							/>
 						</div>

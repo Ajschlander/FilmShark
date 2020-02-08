@@ -1,0 +1,166 @@
+[debug] [2020-02-08T00:59:30.682Z] ----------------------------------------------------------------------
+[debug] [2020-02-08T00:59:30.683Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Dangl\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-02-08T00:59:30.684Z] CLI Version:   7.12.1
+[debug] [2020-02-08T00:59:30.684Z] Platform:      win32
+[debug] [2020-02-08T00:59:30.684Z] Node Version:  v13.3.0
+[debug] [2020-02-08T00:59:30.685Z] Time:          Fri Feb 07 2020 18:59:30 GMT-0600 (Central Standard Time)
+[debug] [2020-02-08T00:59:30.685Z] ----------------------------------------------------------------------
+[debug] [2020-02-08T00:59:30.685Z] 
+[debug] [2020-02-08T00:59:30.691Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-08T00:59:30.691Z] > authorizing via signed-in user
+[debug] [2020-02-08T00:59:30.692Z] [iam] checking project filmshark-c0324 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-02-08T00:59:30.693Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/filmshark-c0324:testIamPermissions  
+
+[debug] [2020-02-08T00:59:30.856Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-08T00:59:30.857Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/filmshark-c0324  
+ 
+[debug] [2020-02-08T00:59:31.049Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'filmshark-c0324'...
+[info] 
+[info] i  deploying storage, firestore, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script.
+[debug] [2020-02-08T00:59:35.758Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/filmshark-c0324  
+ 
+[debug] [2020-02-08T00:59:35.984Z] <<< HTTP RESPONSE 500
+[debug] [2020-02-08T00:59:35.984Z] <<< HTTP RESPONSE BODY
+[info] 
+
+There was an issue deploying your functions. Verify that your project has a Google App Engine instance setup at https://console.cloud.google.com/appengine and try again. If this issue persists, please contact support.
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2020-02-08T00:59:35.996Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": 500,
+        "message": "Internal error encountered.",
+        "status": "INTERNAL"
+      }
+    },
+    "headers": {
+      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Sat, 08 Feb 2020 00:59:33 GMT",
+      "server": "ESF",
+      "cache-control": "private",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000",
+      "accept-ranges": "none",
+      "transfer-encoding": "chunked"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "appengine.googleapis.com",
+        "port": 443,
+        "hostname": "appengine.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1/apps/filmshark-c0324",
+        "path": "/v1/apps/filmshark-c0324",
+        "href": "https://appengine.googleapis.com/v1/apps/filmshark-c0324"
+      },
+      "method": "GET"
+    }
+  }
+}
+[debug] [2020-02-08T01:01:23.288Z] ----------------------------------------------------------------------
+[debug] [2020-02-08T01:01:23.292Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Dangl\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-02-08T01:01:23.293Z] CLI Version:   7.12.1
+[debug] [2020-02-08T01:01:23.293Z] Platform:      win32
+[debug] [2020-02-08T01:01:23.293Z] Node Version:  v13.3.0
+[debug] [2020-02-08T01:01:23.295Z] Time:          Fri Feb 07 2020 19:01:23 GMT-0600 (Central Standard Time)
+[debug] [2020-02-08T01:01:23.295Z] ----------------------------------------------------------------------
+[debug] [2020-02-08T01:01:23.295Z] 
+[debug] [2020-02-08T01:01:23.308Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-08T01:01:23.309Z] > authorizing via signed-in user
+[debug] [2020-02-08T01:01:23.309Z] [iam] checking project filmshark-c0324 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-02-08T01:01:23.311Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-02-08T01:01:23.311Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-02-08T01:01:23.493Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-08T01:01:23.511Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/filmshark-c0324:testIamPermissions  
+
+[debug] [2020-02-08T01:01:23.691Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-08T01:01:23.692Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/filmshark-c0324  
+ 
+[debug] [2020-02-08T01:01:23.874Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'filmshark-c0324'...
+[info] 
+[info] i  deploying storage, firestore, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script.
+[debug] [2020-02-08T01:01:30.275Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/filmshark-c0324  
+ 
+[debug] [2020-02-08T01:01:30.552Z] <<< HTTP RESPONSE 500
+[debug] [2020-02-08T01:01:30.552Z] <<< HTTP RESPONSE BODY
+[info] 
+
+There was an issue deploying your functions. Verify that your project has a Google App Engine instance setup at https://console.cloud.google.com/appengine and try again. If this issue persists, please contact support.
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2020-02-08T01:01:30.572Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500,
+    "body": {
+      "error": {
+        "code": 500,
+        "message": "Internal error encountered.",
+        "status": "INTERNAL"
+      }
+    },
+    "headers": {
+      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Sat, 08 Feb 2020 01:01:28 GMT",
+      "server": "ESF",
+      "cache-control": "private",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000",
+      "accept-ranges": "none",
+      "transfer-encoding": "chunked"
+    },
+    "request": {
+      "uri": {
+        "protocol": "https:",
+        "slashes": true,
+        "auth": null,
+        "host": "appengine.googleapis.com",
+        "port": 443,
+        "hostname": "appengine.googleapis.com",
+        "hash": null,
+        "search": null,
+        "query": null,
+        "pathname": "/v1/apps/filmshark-c0324",
+        "path": "/v1/apps/filmshark-c0324",
+        "href": "https://appengine.googleapis.com/v1/apps/filmshark-c0324"
+      },
+      "method": "GET"
+    }
+  }
+}
