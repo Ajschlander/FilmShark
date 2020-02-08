@@ -58,13 +58,7 @@ const SignUp = ({ history }) => {
 					.createUserWithEmailAndPassword(
 						email.value,
 						password.value
-					).then(cred => {
-						console.log(db.collection("users"));
-						db.collection("users").doc(cred.user.uid).set({
-							email: email.value
-						})
-						console.log(db.collection("users"));
-					}).catch(err => {
+					).catch(err => {
 						console.log(err);
 					});
 				history.push("/home");
