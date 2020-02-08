@@ -54,7 +54,7 @@ const SignUp = ({ history }) => {
 			event.preventDefault();
 			const { email, password } = event.target.elements;
 			try {
-				app
+				await app
 					.auth()
 					.createUserWithEmailAndPassword(
 						email.value,
