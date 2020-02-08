@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require("firebase-admin");
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp({databaseURL:process.env.REACT_APP_FIREBASE_DATABASE});
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -10,14 +10,14 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
 
-exports.userCreated = functions.auth.user().onCreate(e => {
-    let userId = e.data.uid;
-    let email = e.data.email;
+exports.userCreated = functions.auth.user().onCreate(user => {
+
+	const {uid, email} = user;
 
 	return admin
 		.firestore()
 		.collection("users")
-		.doc(userId)
+		.doc(uid)
 		.set({
             email: email,
             top5movies: [],
