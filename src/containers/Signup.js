@@ -53,27 +53,15 @@ const SignUp = ({ history }) => {
 		async event => {
 			event.preventDefault();
 			const { email, password } = event.target.elements;
-			try {
 				await app
 					.auth()
 					.createUserWithEmailAndPassword(
 						email.value,
 						password.value
-					).then(cred => {
-						const user = {
-							uid: cred.user.uid,
-							email: email.value,
-							top5movies: [],
-							watchList: []
-						};
-						db.collection("users").doc(cred.user.uid).set(user);
-					}).catch(err => {
+					).catch(err => {
 						console.log(err);
 					});
 				history.push("/home");
-			} catch (err) {
-				console.log(err.message);
-			}
 		},
 		[history]
 	);
