@@ -24,16 +24,3 @@ exports.userCreated = functions.auth.user().onCreate(user => {
             watchList: []
 		});
 });
-
-exports.getUserData = functions.https.onRequest((req, res) => {
-	let db = admin.firestore();
-	
-
-	db.collection("users")
-	.get()
-	.then(snapshot => {
-		return snapshot.docs
-	}).catch(err => {
-		return err;
-	})
-})
