@@ -1,4 +1,6 @@
 import React from "react";
+import * as firebase from "firebase";
+import app from "../firebase";
 import { IoIosPlayCircle, IoMdEye, IoIosAddCircle } from "react-icons/io";
 import { Grid, Button } from "@material-ui/core";
 import Modal from "react-modal";
@@ -9,7 +11,9 @@ Modal.setAppElement("#root");
 
 const MovieModal = props => {
 
-	// isOpen is true
+	// Get the user that is logged in
+	const user = firebase.auth().currentUser;
+	const db = app.firestore();
 
 	const closeMovieModal = () => {
 		return props.isOpen;
@@ -55,6 +59,19 @@ const MovieModal = props => {
 			return <div>No Poster</div>;
 		}
 	};
+
+	const handleAddToFavClick = () => {
+		// saving props.movie to db
+		console.log(db.collection("users").get());
+		// console.log(props.movie);
+		console.log(user.uid);
+	}
+
+	const handleWatchLaterClick = () => {
+		// find the document in firestore that has the same id as the current user
+		// Add movie object to watchlater arr document field in db
+		// close modal
+	}
 
 	const handleTrailerClick = async (e) => {
 		e.stopPropagation();
@@ -123,6 +140,7 @@ const MovieModal = props => {
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
 										e.stopPropagation();
+										handleAddToFavClick();
 									}}
 								>
 									<IoIosAddCircle />
