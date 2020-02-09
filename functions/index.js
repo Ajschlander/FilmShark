@@ -23,3 +23,8 @@ exports.userCreated = functions.auth.user().onCreate(user => {
 			watchList: []
 		});
 });
+
+exports.addMovieToFavorites = functions.https.onCall(data => {
+	console.log(data);
+	return data
+})

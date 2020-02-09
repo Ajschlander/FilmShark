@@ -9,11 +9,12 @@ import "../styles/Movie-Modal.css";
 
 Modal.setAppElement("#root");
 
+app.functions().useFunctionsEmulator("http://localhost:6000");
+
 const MovieModal = props => {
 
 	// Get the user that is logged in
 	const user = firebase.auth().currentUser;
-	const db = app.firestore();
 
 	const closeMovieModal = () => {
 		return props.isOpen;
@@ -62,9 +63,13 @@ const MovieModal = props => {
 
 	const handleAddToFavClick = async () => {
 		// saving props.movie to db
-		app.firestore().collection("users").doc(user.uid).get().then(snapshot => {
-			console.log(snapshot.docs)
-		});
+		const addMovieCall = firebase.addMovieToFavorites("hello")
+		addMovieCall()
+		.then(res => {
+			console.log(res);
+		}).catch(err => {
+			console.log(err);
+		})
 		// console.log(props.movie);
 		console.log(user.uid);
 	}
