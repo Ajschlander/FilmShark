@@ -60,9 +60,23 @@ const MovieModal = props => {
 		}
 	};
 
-	const handleAddToFavClick = () => {
+	const handleAddToFavClick = async () => {
 		// saving props.movie to db
-		console.log(db.collection("users").get());
+		let docRef = app.firestore().collection("users").doc(user.uid);
+
+		return await docRef
+			.get()
+			.then(doc => {
+				if (doc.exists) {
+					console.log("Document data:", doc.data());
+				} else {
+					// doc.data() will be undefined in this case
+					console.log("No such document!");
+				}
+			})
+			.catch(function(error) {
+				console.log("Error getting document:", error);
+			});
 		// console.log(props.movie);
 		console.log(user.uid);
 	}
