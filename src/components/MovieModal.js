@@ -104,7 +104,7 @@ const MovieModal = props => {
 		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
 		await userRef.update({
 			watchList: app.firestore.FieldValue.arrayUnion(props.movie)
-		  });
+		});
 
 		  
 

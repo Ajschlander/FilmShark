@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as firebase from "firebase";
 import app from "../firebase";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Link, Typography, Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
@@ -276,6 +276,11 @@ const Home = () => {
 							</div>
 						</Grid>
 						<Grid item>
+							<Button href="/info">
+								View my lists
+							</Button>
+						</Grid>
+						<Grid item>
 							<div className="Home-results-for-display">
 								<h2>
 									Results for: <span>{debouncedQuery}</span>
@@ -302,6 +307,7 @@ const Home = () => {
 								description={movie.overview}
 								release-date={movie.release_date}
 								id={movie.id}
+								key={movie.id}
 							/>
 						</Grid>
 					))}

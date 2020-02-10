@@ -7,7 +7,14 @@ export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
 
 	useEffect(() => {
-		app.auth().onAuthStateChanged(setCurrentUser);
+		app.auth().onAuthStateChanged(user => {
+			if(user){
+				setCurrentUser(user);
+			}
+			else {
+				setCurrentUser(null);
+			}
+		});
 	}, []);
 
 	return (
