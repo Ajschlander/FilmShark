@@ -85,8 +85,6 @@ const Home = () => {
 
 	// Get the user that is logged in
 	const user = firebase.auth().currentUser;
-	console.log(user);
-	// let displayName = user.email.split('@')[0];
 
 	// set the useStyles to classes
 	let classes = useStyles();
@@ -304,7 +302,6 @@ const Home = () => {
 								description={movie.overview}
 								release-date={movie.release_date}
 								id={movie.id}
-								key={movie.id}
 							/>
 						</Grid>
 					))}
