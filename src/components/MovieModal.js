@@ -64,7 +64,7 @@ const MovieModal = props => {
 	const handleAddToFavClick = async () => {
 		// saving props.movie to db
 		let usersRef = app.firestore().collection("users").doc(`${user.uid}`);
-		usersRef.get()
+		await usersRef.get()
 		.then(doc => {
 			if(!doc.exists){
 				console.log("No document!");
@@ -77,18 +77,39 @@ const MovieModal = props => {
 		});
 
 		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
-		userRef.update({
-			top5movies: app.firestore.FieldValue.arrayUnion(props.movie.title)
+		await userRef.update({
+			top5movies: app.firestore.FieldValue.arrayUnion(props.movie)
 		  });
+
+		  
 
 		// console.log(props.movie);
 		console.log(user.uid);
 	}
 
-	const handleWatchLaterClick = () => {
-		// find the document in firestore that has the same id as the current user
-		// Add movie object to watchlater arr document field in db
-		// close modal
+	const handleWatchLaterClick = async () => {
+		let usersRef = app.firestore().collection("users").doc(`${user.uid}`);
+		await usersRef.get()
+		.then(doc => {
+			if(!doc.exists){
+				console.log("No document!");
+			}
+			else{
+				console.log("Document data: ", doc.data());
+			}
+		}).catch(err => {
+			console.log(err);
+		});
+
+		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
+		await userRef.update({
+			watchList: app.firestore.FieldValue.arrayUnion(props.movie)
+		  });
+
+		  
+
+		// console.log(props.movie);
+		console.log(user.uid);
 	}
 
 	const handleTrailerClick = async (e) => {
@@ -148,7 +169,7 @@ const MovieModal = props => {
 								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
-										e.stopPropagation();
+										handleWatchLaterClick();
 									}}
 								>
 									<IoMdEye />
@@ -157,7 +178,6 @@ const MovieModal = props => {
 								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
-										e.stopPropagation();
 										handleAddToFavClick();
 									}}
 								>
