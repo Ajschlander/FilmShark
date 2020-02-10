@@ -85,6 +85,8 @@ const Home = () => {
 
 	// Get the user that is logged in
 	const user = firebase.auth().currentUser;
+	console.log(user);
+	// let displayName = user.email.split('@')[0];
 
 	// set the useStyles to classes
 	let classes = useStyles();
@@ -289,7 +291,6 @@ const Home = () => {
 	};
 
 	const renderContent = () => {
-		console.log(movies);
 		if (loaded && movies.length >= 1) {
 			return (
 				<Grid container spacing={5} className="Home-content">

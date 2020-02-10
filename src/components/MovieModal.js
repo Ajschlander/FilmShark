@@ -63,13 +63,24 @@ const MovieModal = props => {
 
 	const handleAddToFavClick = async () => {
 		// saving props.movie to db
-		const addMovieCall = firebase.addMovieToFavorites("hello")
-		addMovieCall()
-		.then(res => {
-			console.log(res);
+		let usersRef = app.firestore().collection("users").doc(`${user.uid}`);
+		usersRef.get()
+		.then(doc => {
+			if(!doc.exists){
+				console.log("No document!");
+			}
+			else{
+				console.log("Document data: ", doc.data());
+			}
 		}).catch(err => {
 			console.log(err);
-		})
+		});
+
+		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
+		userRef.update({
+			top5movies: app.firestore.FieldValue.arrayUnion(props.movie.title)
+		  });
+
 		// console.log(props.movie);
 		console.log(user.uid);
 	}

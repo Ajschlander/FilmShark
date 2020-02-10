@@ -11,7 +11,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.userCreated = functions.auth.user().onCreate(user => {
-	const { uid, email } = user;
+	const { uid, email, displayName } = user;
 
 	return admin
 		.firestore()
@@ -19,12 +19,8 @@ exports.userCreated = functions.auth.user().onCreate(user => {
 		.doc(uid)
 		.set({
 			email: email,
+			displayName: displayName,
 			top5movies: [],
 			watchList: []
 		});
 });
-
-exports.addMovieToFavorites = functions.https.onCall(data => {
-	console.log(data);
-	return data
-})
