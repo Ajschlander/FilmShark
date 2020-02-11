@@ -5,7 +5,7 @@ import { Grid, Link, Typography, Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import app from "../firebase";
 import logo from "../images/logo transparent.png";
-import MovieCard from "../components/MovieCard";
+import MovieCardItem from "../components/MovieCardItem";
 import "../styles/Info.css";
 
 const useStyles = makeStyles(theme => ({
@@ -228,8 +228,6 @@ const Info = () => {
     getUserWatchlist();
   }, []);
 
-  const renderFavList = () => {};
-
   return (
     <div>
       <div>{renderNavbar()}</div>
@@ -238,7 +236,7 @@ const Info = () => {
           <Grid container spacing={5} className="Home-content">
             {favMovieArr.map(movie => (
               <Grid item xs={12} md={4} lg={3}>
-                <MovieCard
+                <MovieCardItem
                   title={movie.title}
                   rating={movie.vote_average}
                   poster={movie.poster_path}
@@ -256,7 +254,7 @@ const Info = () => {
           <Grid container spacing={5} className="Home-content">
             {watchlist.map(movie => (
               <Grid item xs={12} md={4} lg={3}>
-                <MovieCard
+                <MovieCardItem
                   title={movie.title}
                   rating={movie.vote_average}
                   poster={movie.poster_path}
