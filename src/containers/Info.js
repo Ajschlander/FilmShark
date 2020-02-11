@@ -1,6 +1,6 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import * as firebase from "firebase";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Link, Typography, Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import app from "../firebase";
@@ -84,21 +84,11 @@ const Info = () => {
 						</Grid>
 						<Grid item>
 							<Typography className={classes.root}>
-								<Link
-									className={classes.button}
-								>
+								<Link className={classes.button}>
 									Relevance
 								</Link>
-								<Link
-									className={classes.button}
-								>
-									Rating
-								</Link>
-								<Link
-									className={classes.button}
-								>
-									Year
-								</Link>
+								<Link className={classes.button}>Rating</Link>
+								<Link className={classes.button}>Year</Link>
 							</Typography>
 						</Grid>
 						<Grid item>
@@ -117,12 +107,18 @@ const Info = () => {
 						</Grid>
 					</Grid>
 				</div>
-				<Grid className={classes.container}>
+				<Grid
+					className={classes.container}
+					container
+					direction="row"
+					justify="space-evenly"
+					alignItems="center"
+				>
 					<Grid item>
-                        <Button className={classes.button} href="/home">
-                            Back to searching
-                        </Button>
-                    </Grid>
+						<Button className={classes.button} href="/home">
+							Back to searching
+						</Button>
+					</Grid>
 				</Grid>
 			</Grid>
 		);
@@ -146,7 +142,6 @@ const Info = () => {
 			.catch(err => {
 				console.log(err);
 			});
-		console.log(favMovieArr);
 	};
 
 	const getUserWatchlist = async () => {
@@ -175,24 +170,20 @@ const Info = () => {
 	}, [])
 
         return (
-            <div>
-                <div>
-                    {renderNavbar()}
-                </div>
-                <h1>Favorites</h1>
-                {favMovieArr.map(item => (
-                    <div>
-                        {item.title}
-                    </div>
-                ))}
-                <h1>Watchlist</h1>
-                {watchlist.map(item => (
-                    <div>
-                        {item.title}
-                    </div>
-                ))}
-            </div>
-        )
+			<div>
+				<div>{renderNavbar()}</div>
+				<div className="Info-lists-container">
+					<h1>Favorites</h1>
+					{favMovieArr.map(item => (
+						<div>{item.title}</div>
+					))}
+					<h1>Watchlist</h1>
+					{watchlist.map(item => (
+						<div>{item.title}</div>
+					))}
+				</div>
+			</div>
+		);
     }
 
 export default Info;
