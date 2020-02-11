@@ -3,9 +3,7 @@ import * as firebase from "firebase";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Grid, Link, Typography, Button } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import TextField from "@material-ui/core/TextField";
 import app from "../firebase";
-import { AuthContext } from "../utils/Auth";
 import logo from "../images/logo transparent.png";
 import "../styles/Info.css";
 
@@ -49,39 +47,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const CssTextField = withStyles({
-	root: {
-		"& label.Mui-focused": {
-			color: "#00d38e"
-		},
-		"& .MuiFormLabel-root": {
-			color: "#00d38e"
-		},
-		"& .MuiInput-underline:after": {
-			borderBottomColor: "#00d38e"
-		},
-		"& .MuiInputBase-input": {
-			color: "#00d38e",
-			fontWeight: "bold"
-		},
-		"& .MuiOutlinedInput-root": {
-			"& fieldset": {
-				borderColor: "#00d38e"
-			},
-			"&:hover fieldset": {
-				borderColor: "#00d38e"
-			},
-			"&.Mui-focused fieldset": {
-				borderColor: "#00d38e"
-			}
-		}
-	}
-})(TextField);
-
 const Info = () => {
 
-    const { currentUser } = useContext(AuthContext);
-    let user = currentUser;
+	let user = firebase.auth().currentUser;
 
     const [favMovieArr, setFavMovieArr] = useState([]),
         [watchlist, setWatchlist] = useState([]);
@@ -158,51 +126,53 @@ const Info = () => {
 				</Grid>
 			</Grid>
 		);
-    }
+	}
+	
+	const getUserFavorites = async () => {
+		let usersRef = app
+			.firestore()
+			.collection("users")
+			.doc(`${user.uid}`);
+		await usersRef
+			.get()
+			.then(doc => {
+				if (!doc.exists) {
+					console.log("No document!");
+				} else {
+					let movieArr = doc.data().top5movies;
+					setFavMovieArr(movieArr);
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+		console.log(favMovieArr);
+	};
 
-    if(user){
-        const getUserFavorites = async () => {
-			let usersRef = app
-				.firestore()
-				.collection("users")
-				.doc(`${user.uid}`);
-			await usersRef
-				.get()
-				.then(doc => {
-					if (!doc.exists) {
-						console.log("No document!");
-					} else {
-                        let movieArr = doc.data().top5movies;
-                        setFavMovieArr(movieArr);
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-        };
-        
-        const getUserWatchlist = async () => {
-            let usersRef = app
-				.firestore()
-				.collection("users")
-				.doc(`${user.uid}`);
-			await usersRef
-				.get()
-				.then(doc => {
-					if (!doc.exists) {
-						console.log("No document!");
-					} else {
-						let movieArr = doc.data().watchList;
-						setWatchlist(movieArr);
-					}
-				})
-				.catch(err => {
-					console.log(err);
-				});
-        }
+	const getUserWatchlist = async () => {
+		let usersRef = app
+			.firestore()
+			.collection("users")
+			.doc(`${user.uid}`);
+		await usersRef
+			.get()
+			.then(doc => {
+				if (!doc.exists) {
+					console.log("No document!");
+				} else {
+					let movieArr = doc.data().watchList;
+					setWatchlist(movieArr);
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 
-        getUserFavorites();
-        getUserWatchlist();
+	useEffect(() => {
+		getUserFavorites();
+		getUserWatchlist();
+	}, [])
 
         return (
             <div>
@@ -224,13 +194,5 @@ const Info = () => {
             </div>
         )
     }
-    else {
-        return (
-			<div>
-                WAITING ON INFO FROM DB
-            </div>
-		);
-    }
-}
 
 export default Info;

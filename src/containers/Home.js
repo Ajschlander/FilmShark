@@ -276,7 +276,7 @@ const Home = () => {
 							</div>
 						</Grid>
 						<Grid item>
-							<Button className={classes.button} href="/info">
+							<Button className={classes.button} href="/pending">
 								View my lists
 							</Button>
 						</Grid>
