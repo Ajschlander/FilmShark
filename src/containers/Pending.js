@@ -16,26 +16,7 @@ import "../styles/Form.css";
 // }));
 
 
-const Pending = ({ history }) => {
-	const handleSignUp = useCallback(
-		async event => {
-			event.preventDefault();
-			const { email, password, name } = event.target.elements;
-			await app
-				.auth()
-				.createUserWithEmailAndPassword(email.value, password.value)
-				.then(res => {
-					res.user.updateProfile({
-						displayName: name.value
-					});
-				})
-				.catch(err => {
-					console.log(err);
-				});
-			history.push("/home");
-		},
-		[history]
-	);
+const Pending = () => {
 
 	const { currentUser } = useContext(AuthContext);
 
