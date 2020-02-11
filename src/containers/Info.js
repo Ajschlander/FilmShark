@@ -229,47 +229,49 @@ const Info = () => {
   }, []);
 
   return (
-    <div>
-      <div>{renderNavbar()}</div>
-      <div className="Info-lists-container">
-        <div className={classes.container}>
-          <Grid container spacing={5} className="Home-content">
-            {favMovieArr.map(movie => (
-              <Grid item xs={12} md={4} lg={3}>
-                <MovieCardItem
-                  title={movie.title}
-                  rating={movie.vote_average}
-                  poster={movie.poster_path}
-                  backdrop={movie.backdrop_path}
-                  description={movie.overview}
-                  release-date={movie.release_date}
-                  id={movie.id}
-                  key={movie.id}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-        <div className={classes.container}>
-          <Grid container spacing={5} className="Home-content">
-            {watchlist.map(movie => (
-              <Grid item xs={12} md={4} lg={3}>
-                <MovieCardItem
-                  title={movie.title}
-                  rating={movie.vote_average}
-                  poster={movie.poster_path}
-                  backdrop={movie.backdrop_path}
-                  description={movie.overview}
-                  release-date={movie.release_date}
-                  id={movie.id}
-                  key={movie.id}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      </div>
-    </div>
+		<div>
+			<div>{renderNavbar()}</div>
+			<div className="Info-lists-container">
+				<div className={classes.container}>
+					<h1 className="Info-fav-title">Favorites</h1>
+					<Grid container spacing={5} className="Info-fav-content">
+						{favMovieArr.map(movie => (
+							<Grid item xs={12} md={4} lg={3}>
+								<MovieCardItem
+									title={movie.title}
+									rating={movie.vote_average}
+									poster={movie.poster_path}
+									backdrop={movie.backdrop_path}
+									description={movie.overview}
+									release-date={movie.release_date}
+									id={movie.id}
+									key={movie.id}
+								/>
+							</Grid>
+						))}
+					</Grid>
+				</div>
+				<div className={classes.container}>
+					<h1 className="Info-watch-title">WatchList</h1>
+					<Grid container spacing={5} className="Info-watch-content">
+						{watchlist.map(movie => (
+							<Grid item xs={12} md={4} lg={3}>
+								<MovieCardItem
+									title={movie.title}
+									rating={movie.vote_average}
+									poster={movie.poster_path}
+									backdrop={movie.backdrop_path}
+									description={movie.overview}
+									release-date={movie.release_date}
+									id={movie.id}
+									key={movie.id}
+								/>
+							</Grid>
+						))}
+					</Grid>
+				</div>
+			</div>
+		</div>
   );
 };
 

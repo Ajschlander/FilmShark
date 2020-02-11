@@ -2,3 +2,22 @@
     background-color: rgb(27, 31, 39);
 	min-height: 100vh;
 }
+
+.Info-fav-content{
+    padding-top: 30vh;
+}
+
+.Info-watch-content{
+    padding-top: 10vh;
+}
+
+.Info-fav-title{
+    color: #00d38e;
+    text-decoration: underline;
+    padding-top: 20vh 
+}
+
+.Info-watch-title{
+    color: #00d38e;
+    text-decoration: underline;
+}

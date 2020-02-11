@@ -167,7 +167,7 @@ const MovieModalItem = props => {
 									<IoIosPlayCircle />
 									TRAILER
 								</Button>
-								<Button
+								{/* <Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
 										handleMoveToFavorites();
@@ -175,8 +175,8 @@ const MovieModalItem = props => {
 								>
 									<IoMdEye />
 									Move to Favorites
-								</Button>
-								<Button
+								</Button> */}
+								{/* <Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
                                         handleRemove();
@@ -184,7 +184,7 @@ const MovieModalItem = props => {
 								>
 									<IoIosAddCircle />
 									Remove Movie
-								</Button>
+								</Button> */}
 							</div>
 						</div>
 					</Grid>
