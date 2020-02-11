@@ -117,7 +117,7 @@ const Info = () => {
 				>
 					<Grid item>
 						<Button className={classes.button} href="/home">
-							Back to searching
+							Search for more movies
 						</Button>
 					</Grid>
 				</Grid>
@@ -176,26 +176,42 @@ const Info = () => {
 			<div>
 				<div>{renderNavbar()}</div>
 				<div className="Info-lists-container">
-					<Grid container spacing={5} className="Home-content">
-						{favMovieArr.map(movie => (
-							<Grid item xs={6} md={4} lg={3}>
-								<MovieCard
-									title={movie.title}
-									rating={movie.vote_average}
-									poster={movie.poster_path}
-									backdrop={movie.backdrop_path}
-									description={movie.overview}
-									release-date={movie.release_date}
-									id={movie.id}
-									key={movie.id}
-								/>
-							</Grid>
-						))}
-					</Grid>
-					<h1>Watchlist</h1>
-					{watchlist.map(item => (
-						<div>{item.title}</div>
-					))}
+					<div className={classes.container}>
+						<Grid container spacing={5} className="Home-content">
+							{favMovieArr.map(movie => (
+								<Grid item xs={12} md={4} lg={3}>
+									<MovieCard
+										title={movie.title}
+										rating={movie.vote_average}
+										poster={movie.poster_path}
+										backdrop={movie.backdrop_path}
+										description={movie.overview}
+										release-date={movie.release_date}
+										id={movie.id}
+										key={movie.id}
+									/>
+								</Grid>
+							))}
+						</Grid>
+					</div>
+					<div className={classes.container}>
+						<Grid container spacing={5} className="Home-content">
+							{watchlist.map(movie => (
+								<Grid item xs={12} md={4} lg={3}>
+									<MovieCard
+										title={movie.title}
+										rating={movie.vote_average}
+										poster={movie.poster_path}
+										backdrop={movie.backdrop_path}
+										description={movie.overview}
+										release-date={movie.release_date}
+										id={movie.id}
+										key={movie.id}
+									/>
+								</Grid>
+							))}
+						</Grid>
+					</div>
 				</div>
 			</div>
 		);

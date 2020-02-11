@@ -203,7 +203,7 @@ const Home = () => {
 						justify="space-between"
 						alignItems="center"
 					>
-						<Grid item>
+						<Grid item xs={12} md={4} lg={3}>
 							<img
 								className="Navbar-img"
 								src={logo}
@@ -211,7 +211,7 @@ const Home = () => {
 								onClick={reset}
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item xs={12} md={4} lg={3}>
 							<Typography className={classes.root}>
 								<Link
 									className={classes.button}
@@ -236,11 +236,9 @@ const Home = () => {
 								</Link>
 							</Typography>
 						</Grid>
-						<Grid item>
+						<Grid item xs={12} md={4} lg={3}>
 							<div className="Home-hello-display-name">
-								<h2>
-									Hello {user.displayName}!
-								</h2>
+								<h2>Hello {user.displayName}!</h2>
 							</div>
 							<Typography>
 								<Link
@@ -261,7 +259,7 @@ const Home = () => {
 						justify="space-between"
 						alignItems="center"
 					>
-						<Grid item>
+						<Grid item xs={12} md={4} lg={3}>
 							<div className="Home-input">
 								<CssTextField
 									className={classes.input}
@@ -275,12 +273,12 @@ const Home = () => {
 								/>
 							</div>
 						</Grid>
-						<Grid item>
+						<Grid item xs={12} md={4} lg={3}>
 							<Button className={classes.button} href="/pending">
 								View my lists
 							</Button>
 						</Grid>
-						<Grid item>
+						<Grid item xs={12}>
 							<div className="Home-results-for-display">
 								<h2>
 									Results for: <span>{debouncedQuery}</span>
@@ -298,7 +296,7 @@ const Home = () => {
 			return (
 				<Grid container spacing={5} className="Home-content">
 					{movies.map(movie => (
-						<Grid item xs={6} md={4} lg={3}>
+						<Grid item xs={12} md={4} lg={3}>
 							<MovieCard
 								title={movie.title}
 								rating={movie.vote_average}
