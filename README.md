@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).FilmShark
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## FilmShark
 
 ## Live Site Link
 https://filmshark-90cf8.firebaseapp.com/
