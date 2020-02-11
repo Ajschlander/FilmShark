@@ -1,3 +1,4 @@
 .Info-lists-container {
-    margin-top: 20vh;
+    background-color: rgb(27, 31, 39);
+	min-height: 100vh;
 }
