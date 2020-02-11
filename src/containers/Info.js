@@ -51,9 +51,9 @@ const useStyles = makeStyles(theme => ({
 const Info = () => {
   let user = firebase.auth().currentUser;
 
-  const [favMovieArr, setFavMovieArr] = useState([]),
-    [sort, setSort] = useState("relevance"),
-    [watchlist, setWatchlist] = useState([]);
+  const [sort, setSort] = useState("relevance"),
+		[favMovieArr, setFavMovieArr] = useState([]),
+		[watchlist, setWatchlist] = useState([]);
 
   let classes = useStyles();
 
@@ -90,13 +90,22 @@ const Info = () => {
 
   useEffect(() => {
     if (sort === "rating") {
+      // Sort watchlist arr
       watchlist.sort((a, b) => {
         if (a.vote_average > b.vote_average) return -1;
         if (a.vote_average < b.vote_average) return 1;
         return 0;
       });
       setWatchlist([...watchlist]);
+      // Sort fav movie arr
+      favMovieArr.sort((a, b) => {
+        if (a.vote_average > b.vote_average) return -1;
+        if (a.vote_average < b.vote_average) return 1;
+        return 0;
+      });
+      setFavMovieArr([...favMovieArr]);
     } else if (sort === "year") {
+      // Sort watchlist arr
       watchlist.sort((a, b) => {
         if (a.release_date.substring(0, 4) > b.release_date.substring(0, 4))
           return -1;
@@ -105,8 +114,18 @@ const Info = () => {
         return 0;
       });
       setWatchlist([...watchlist]);
+      // Sort fav movie arr
+      favMovieArr.sort((a, b) => {
+        if (a.release_date.substring(0, 4) > b.release_date.substring(0, 4))
+          return -1;
+        if (a.release_date.substring(0, 4) < b.release_date.substring(0, 4))
+          return 1;
+        return 0;
+      });
+      setFavMovieArr([...favMovieArr]);
     } else if (sort === "relevance") {
       getUserWatchlist();
+      getUserFavorites();
     }
   }, [sort]);
 
