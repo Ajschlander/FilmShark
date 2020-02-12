@@ -1,7 +1,7 @@
 import React from "react";
 import * as firebase from "firebase";
 import app from "../firebase";
-import { IoIosPlayCircle, IoMdEye, IoIosAddCircle } from "react-icons/io";
+import { IoIosPlayCircle, IoIosHeart, IoIosBackspace } from "react-icons/io";
 import { Grid, Button } from "@material-ui/core";
 import Modal from "react-modal";
 import axios from "axios";
@@ -19,6 +19,10 @@ const MovieModalItem = props => {
 	const closeMovieModal = () => {
 		return props.isOpen;
 	};
+
+	const reset = () => {
+		window.location.reload();
+	}
 
 	const getGenres = () => {
 		let genres = props.movie.genres;
@@ -86,6 +90,8 @@ const MovieModalItem = props => {
 
 		// console.log(props.movie);
 		console.log(user.uid);
+
+		reset();
 	}
 
 	const handleRemove = async (id) => {
@@ -102,7 +108,7 @@ const MovieModalItem = props => {
 			console.log(err);
 		});
 
-		usersRef.update({
+		await usersRef.update({
 			top5movies: props.favMovieArr.filter(movie => movie.id !== id),
 			watchList: props.watchList.filter(movie => movie.id !== id)
 		});
@@ -111,6 +117,8 @@ const MovieModalItem = props => {
 
 		// console.log(props.movie);
 		console.log(user.uid);
+
+		reset();
 	}
 
 	const handleTrailerClick = async (e) => {
@@ -167,22 +175,22 @@ const MovieModalItem = props => {
 									<IoIosPlayCircle />
 									TRAILER
 								</Button>
-								{/* <Button
+								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
 										handleMoveToFavorites();
 									}}
 								>
-									<IoMdEye />
+									<IoIosHeart />
 									Move to Favorites
-								</Button> */}
+								</Button>
 								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
-                                        handleRemove(props.movie.id);
+										handleRemove(props.movie.id);
 									}}
 								>
-									<IoIosAddCircle />
+									<IoIosBackspace />
 									Remove Movie
 								</Button>
 							</div>
