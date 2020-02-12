@@ -124,7 +124,14 @@ const MovieCardItem = props => {
 	return (
 		<div className="MovieCard-card" onClick={showModal}>
 			<div>
-				<MovieModalItem className="MovieCard-modal" isOpen={modal} movie={movie} key={movie.id}/>
+				<MovieModalItem
+					className="MovieCard-modal"
+					isOpen={modal}
+					movie={movie}
+					favMovieArr={props.favMovieArr}
+					watchList={props.watchList}
+					key={movie.id}
+				/>
 				{renderPoster()}
 				{renderMovieInfo()}
 			</div>

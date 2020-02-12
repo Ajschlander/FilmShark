@@ -48,6 +48,7 @@ const MovieModalItem = props => {
 
 	const renderMoviePoster = () => {
 		let poster_url = props.movie.poster_path;
+		console.log(props.watchList)
 		if (poster_url) {
 			return (
 				<img
@@ -87,7 +88,7 @@ const MovieModalItem = props => {
 		console.log(user.uid);
 	}
 
-	const handleRemove = async () => {
+	const handleRemove = async (id) => {
 		let usersRef = app.firestore().collection("users").doc(`${user.uid}`);
 		await usersRef.get()
 		.then(doc => {
@@ -101,10 +102,9 @@ const MovieModalItem = props => {
 			console.log(err);
 		});
 
-		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
-		await userRef.update({
-            top5movies: app.firestore.FieldValue.arrayRemove(props.movie),
-            watchList: app.firestore.FieldValue.arrayRemove(props.movie)
+		usersRef.update({
+			top5movies: props.favMovieArr.filter(movie => movie.id !== id),
+			watchList: props.watchList.filter(movie => movie.id !== id)
 		});
 
 		  
@@ -176,15 +176,15 @@ const MovieModalItem = props => {
 									<IoMdEye />
 									Move to Favorites
 								</Button> */}
-								{/* <Button
+								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
-                                        handleRemove();
+                                        handleRemove(props.movie.id);
 									}}
 								>
 									<IoIosAddCircle />
 									Remove Movie
-								</Button> */}
+								</Button>
 							</div>
 						</div>
 					</Grid>

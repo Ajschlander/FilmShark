@@ -265,6 +265,8 @@ const Info = () => {
 									release-date={movie.release_date}
 									id={movie.id}
 									key={movie.id}
+									favMovieArr={favMovieArr}
+									watchList={watchlist}
 								/>
 							</Grid>
 						))}
@@ -284,6 +286,8 @@ const Info = () => {
 									release-date={movie.release_date}
 									id={movie.id}
 									key={movie.id}
+									favMovieArr={favMovieArr}
+									watchList={watchlist}
 								/>
 							</Grid>
 						))}
