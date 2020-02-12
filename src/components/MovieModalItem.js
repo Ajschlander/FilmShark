@@ -66,7 +66,7 @@ const MovieModalItem = props => {
 		}
 	};
 
-	const handleMoveToFavorites = async () => {
+	const handleMoveToFavorites = async (id) => {
 		// saving props.movie to db
 		let usersRef = app.firestore().collection("users").doc(`${user.uid}`);
 		await usersRef.get()
@@ -81,12 +81,18 @@ const MovieModalItem = props => {
 			console.log(err);
 		});
 
-		let userRef = app.firestore().collection("users").doc(`${user.uid}`);
-		await userRef.update({
-			top5movies: app.firestore.FieldValue.arrayUnion(props.movie)
-		  });
+		await usersRef.update({
+			top5movies: app.firestore.FieldValue.arrayUnion(props.movie),
+			watchList: props.watchList.filter(movie => movie.id !== id)
+		});
 
-		  
+		
+		
+		
+		// let userRef = app.firestore().collection("users").doc(`${user.uid}`);
+		// await userRef.update({
+		// 	top5movies: app.firestore.FieldValue.arrayUnion(props.movie)
+		//   });	  
 
 		// console.log(props.movie);
 		console.log(user.uid);
@@ -178,7 +184,7 @@ const MovieModalItem = props => {
 								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {
-										handleMoveToFavorites();
+										handleMoveToFavorites(props.movie.id);
 									}}
 								>
 									<IoIosHeart />
