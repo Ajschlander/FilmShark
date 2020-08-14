@@ -181,6 +181,7 @@ const MovieModalItem = props => {
 									<IoIosPlayCircle />
 									TRAILER
 								</Button>
+								{props.movie}
 								<Button
 									style={{ marginRight: "1rem" }}
 									onClick={e => {

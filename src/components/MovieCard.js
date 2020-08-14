@@ -101,7 +101,7 @@ const MovieCard = props => {
 		} else {
 			return (
 				<div style={{ color: "white" }}>
-					Nothing found!
+					Nothing found! Try again.
 				</div>
 			)
 		}
