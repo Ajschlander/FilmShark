@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## FilmShark
 
 ## Live Site Link
-https://filmshark-90cf8.firebaseapp.com/
+Under Maintenance
 
 ## Description
 FilmShark is an application that allows users to sign up and search movies to create their own personal watch list and favorites.
